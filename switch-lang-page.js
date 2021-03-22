@@ -13,16 +13,20 @@ const getCookie = (cname) => {
   return "";
 };
 
+const getExpiresString = (numberOfDays) => {
+  var d = new Date();
+  d.setTime(d.getTime() + numberOfDays * 24 * 60 * 60 * 1000);
+  return "expires=" + d.toUTCString();
+};
+
 const langCookie = "besna_lang";
 
 let newLanguage = "";
 const currentLanguage = getCookie(langCookie);
 console.log("current:");
 console.log(currentLanguage);
-const expireDays = 30;
-var d = new Date();
-d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
-var expires = "expires=" + d.toUTCString();
+const expires = getExpiresString(30);
+console.log(expires);
 if (currentLanguage === "en") {
   document.cookie = `${langCookie}=jp;${expires}`;
   newLanguage = "jp";
